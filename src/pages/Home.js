@@ -13,7 +13,6 @@ function Home() {
         return <div className="list-container">{list}</div>
     }
 
-    console.info({ db })
 
     return <main>
         {renderList()}
