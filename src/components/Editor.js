@@ -32,11 +32,12 @@ function Editor(props) {
 
 
     function handleUpdateField(e) {
-        const { name, value } = e.target, updated = {}
+        const { name, value } = e.target, changes = {}
+        changes[name] = value
 
-        updated[name] = value
-        updateForm(formData => ({ ...formData, ...updated }))
-        edit(props.id, formData)
+        const updated = { ...formData, ...changes }
+        edit(props.id, updated)
+        updateForm(updated)
     }
 
     return <><form className="editor" onSubmit={e => e.preventDefault()}>
