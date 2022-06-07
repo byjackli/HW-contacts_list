@@ -1,0 +1,8 @@
+{
+  "short_name": "Contacts App",
+  "name": "Contacts List",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1A1F71",
+  "background_color": "#FFFFFF"
+}
