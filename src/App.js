@@ -25,7 +25,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/my-card" element={<MyCard />} />
           <Route path="/new" element={<New />} />
-          <Route path="/edit" element={<Edit />} />
+          <Route path="/edit/:id" element={<Edit />} />
           <Route path="/help" element={<Help />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="*" element={<Error />} />

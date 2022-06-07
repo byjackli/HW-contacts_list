@@ -18,7 +18,7 @@ function Card(props) {
             </div>
             <div className="rhs">
                 <button className="preventDefault"><Icon art="delete_forever" title="delete forever" /></button>
-                <Link to={`/edit:${props.id}`}>
+                <Link to={`/edit/${props.id}`}>
                     <Icon art="pen" title="edit contact" />
                 </Link>
             </div>
