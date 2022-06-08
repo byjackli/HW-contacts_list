@@ -1,26 +1,3 @@
-// import { useState } from "react"
-// import db, { edit } from "../static/data.ts"
-
-// function Editor(props) {
-
-//     const
-//         [firstName, updateFirstName] = useState(db[props.id].firstName),
-//         [lastName, updateLastName] = useState(db[props.id].lastName),
-//         [phoneNumber, updatePhoneNumber] = useState(db[props.id].phoneNumber),
-//         [emailAddress, updateEmailAddress] = useState(db[props.id].emailAddress)
-
-//     return <><form className="editor" onSubmit={e => e.preventDefault()}>
-//         <input name="firstName" type="text" placeholder="firstName" value={firstName} onChange={e => updateFirstName(e.target.value)} />
-//         <input name="lastName" type="text" placeholder="lastName" value={lastName} onChange={e => updateLastName(e.target.value)} />
-//         <input name="phoneNumber" type="text" placeholder="phoneNumber" value={phoneNumber} onChange={e => updatePhoneNumber(e.target.value)} />
-//         <input name="emailAddress" type="text" placeholder="emailAddress" value={emailAddress} onChange={e => updateEmailAddress(e.target.value)} />
-//     </form >
-//         {firstName}
-//     </>
-// }
-
-// export default Editor
-
 import { useState } from "react"
 import db, { edit } from "../static/data.ts"
 
