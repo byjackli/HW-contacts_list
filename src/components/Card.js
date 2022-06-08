@@ -1,17 +1,24 @@
-import { useState } from "react"
-import Icon from "./Icon"
+import { useState, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import ModalContext from "../context/ModalContext"
+
+import Icon from "./Icon"
+import Modal from "./Modal"
 
 function Card(props) {
 
     const navigate = useNavigate(),
         [expanded, updateExpanded] = useState(false),
-        [dragOrigin, updateDragOrigin] = useState(undefined);
+        [dragOrigin, updateDragOrigin] = useState(undefined),
+        [{ closeModal }] = useContext(ModalContext);
 
-    function handleDelete() { }
+    function handleDelete() {
+        closeModal()
+    }
     function handleUpdateExpanded(e, state) {
         if (!e.target.closest(".preventDefault"))
-            updateExpanded(state)
+            if (e.type === "keydown" && !["Enter", "Spacebar"].includes(e.key)) return
+            else updateExpanded(state)
     }
     function handleDrag(e) {
         const diff = e.clientX - dragOrigin
@@ -25,14 +32,23 @@ function Card(props) {
         updateDragOrigin(undefined)
     }
 
-    return <div className="card" id={props.id} onClick={e => handleUpdateExpanded(e, !expanded)}
+    const fullname = `${props.firstName}${props.lastName ? ` ${props.lastName}` : ""}`;
+
+    return <div className="card" id={props.id} onClick={e => handleUpdateExpanded(e, !expanded)} tabIndex="0" onKeyDown={e => handleUpdateExpanded(e, !expanded)}
         draggable onDragStart={e => updateDragOrigin(e.clientX)} onDragEnd={e => handleDrag(e)}>
         {expanded ? <div>
             <div className="lhs">
                 <button onClick={e => handleUpdateExpanded(e, false)}><Icon art="reply" title="collapse" /></button>
             </div>
             <div className="rhs">
-                <button className="preventDefault"><Icon art="delete_forever" title="delete forever" /></button>
+                <Modal open={<button className="preventDefault"><Icon art="delete_forever" title="delete forever" /></button>
+                } >
+                    <div>Are you sure you want to delete <strong>{fullname}</strong> from your contacts?</div>
+                    <div>
+                        <button onClick={closeModal}>nevermind</button>
+                        <button onClick={handleDelete}>delete forever</button>
+                    </div>
+                </Modal>
                 <Link to={`/edit/${props.id}`}>
                     <Icon art="pen" title="edit contact" />
                 </Link>
@@ -40,7 +56,7 @@ function Card(props) {
         </div> : null}
 
         <div>
-            <p>{props.firstName}{props.lastName ? ` ${props.lastName}` : null}</p>
+            <p>{fullname}</p>
             {props.icon ? <Icon {...props.icon} /> : null}
         </div>
         <p>{props.phoneNumber}</p>

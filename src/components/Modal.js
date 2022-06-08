@@ -2,18 +2,22 @@ import { useContext, useEffect } from "react"
 import ModalContext from "../context/ModalContext"
 
 export function ModalManager() {
-    const [context, setContext] = useContext(ModalContext),
+    const [{ closeModal, stack }, setContext] = useContext(ModalContext),
         modals = []
+    let trapped = false, resume = document.activeElement;
 
     // close modal
     function close() {
-        const newStack = context
+        const newStack = stack
         newStack.pop()
-        setContext(newStack)
+        setContext({ closeModal, stack: newStack })
+        
+        trapped = false
+        resume.focus()
     }
 
     // traps focus within most recent active modal
-    function trapFocus(event) {
+    function trapFocus(e) {
         const modalManager = document.getElementsByClassName("modal-manager")[0]
         if (!modalManager.childElementCount) return // if modalmanager is empty, do not trap focus
 
@@ -30,46 +34,53 @@ export function ModalManager() {
             ],
             focusEnd = focusable.length - 1,
             focusCur = focusable.indexOf(document.activeElement);
-        console.info({ modal, focusable })
-        if (event.key === `End` || (event.key === `Tab` && event.shiftKey && !focusCur)) {
-            event.preventDefault();
+
+        if (!trapped) {
+            resume = document.activeElement
+            focusable[0].focus()
+            trapped = true
+        }
+
+        if (e.key === `End` || (e.key === `Tab` && e.shiftKey && !focusCur)) {
+            e.preventDefault();
             focusable[focusEnd].focus();
         } else if (
-            event.key === `Home` ||
-            (event.key === `Tab` && !event.shiftKey && focusCur === focusEnd)
+            e.key === `Home` ||
+            (e.key === `Tab` && !e.shiftKey && focusCur === focusEnd)
         ) {
-            event.preventDefault();
+            e.preventDefault();
             focusable[0].focus();
-        } else if (event.key === 'Escape') {
-            event.preventDefault();
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
             close();
         }
     }
 
-    for (let i = 0; i < context.length; i++)
+    for (let i = 0; i < stack.length; i++)
         modals.push(<div className="modal-container" style={{ zIndex: i }} key={`modal-level-${i}`}>
-            {context[i]}
-            <div className="modal-backdrop" onClick={close} />
+            {stack[i]}
+            <div className="modal-backdrop" onClick={close} aria-label="close" />
         </div>)
 
 
     useEffect(() => {
         window.addEventListener("keydown", trapFocus)
+        setContext({ closeModal: close, stack })
         return () => window.removeEventListener("keydown", trapFocus)
     }, [])
 
-    return <div className="modal-manager" aria-hidden={!context.length}>
+    return <div className="modal-manager" aria-hidden={!stack.length}>
         {modals}
     </div>
 }
 
 function Modal(props) {
-    const [context, setContext] = useContext(ModalContext)
+    const [{ closeModal, stack }, setContext] = useContext(ModalContext)
 
     // activate modal
     function open() {
-        const newStack = [...context, <>{props.children}</>]
-        setContext(newStack)
+        const newStack = [...stack, <>{props.children}</>]
+        setContext({ closeModal, stack: newStack })
     }
 
     return <div className="modal-activator" onClick={open}>

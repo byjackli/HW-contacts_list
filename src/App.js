@@ -16,7 +16,7 @@ const Settings = lazy(() => import("./pages/Settings"))
 const Error = lazy(() => import("./pages/Error"))
 
 function App() {
-  const [context, setContext] = useState([])
+  const [context, setContext] = useState({ closeModal: undefined, stack: [] })
 
   return (
     <ModalContext.Provider value={[context, setContext]}>
