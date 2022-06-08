@@ -1,6 +1,11 @@
 import { useContext, useEffect } from "react"
 import ModalContext from "../context/ModalContext"
 
+// 🔨 There are multiple flaws with this component (what is known)
+// 1. stack is incorrectly implemented
+// 2. closeModal function closes everything
+// 3. when modal is opened, first element is not autofocused
+
 export function ModalManager() {
     const [{ closeModal, stack }, setContext] = useContext(ModalContext),
         modals = []
@@ -10,8 +15,8 @@ export function ModalManager() {
     function close() {
         const newStack = stack
         newStack.pop()
-        setContext({ closeModal, stack: newStack })
-        
+        setContext({ closeModal: close, stack: newStack })
+
         trapped = false
         resume.focus()
     }
@@ -56,7 +61,8 @@ export function ModalManager() {
         }
     }
 
-    for (let i = 0; i < stack.length; i++)
+    const modalCount = stack.length
+    for (let i = modalCount - 1; -1 < i; i--)
         modals.push(<div className="modal-container" style={{ zIndex: i }} key={`modal-level-${i}`}>
             {stack[i]}
             <div className="modal-backdrop" onClick={close} aria-label="close" />
@@ -76,11 +82,12 @@ export function ModalManager() {
 
 function Modal(props) {
     const [{ closeModal, stack }, setContext] = useContext(ModalContext)
+    useEffect(() => { props.openModal.current = open }, [])
 
     // activate modal
     function open() {
         const newStack = [...stack, <>{props.children}</>]
-        setContext({ closeModal, stack: newStack })
+        setContext({ closeModal: closeModal, stack: newStack })
     }
 
     return <div className="modal-activator" onClick={open}>
