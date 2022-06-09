@@ -56,9 +56,27 @@ let db: Record<string, Contact> = {
     }
 }
 
-export function del(id: string): void {
-    if (!db[id]) throw new Error(`Delete failed, contact with id of ${id} does not exist!`)
-    delete db[id]
+export let fixed: Record<string, Contact> = {
+    me: {
+        firstName: "John",
+        lastName: "Doe",
+        phoneNumber: "123-456-7890",
+        emailAddress: "John@email.com"
+    },
+    demo: {
+        firstName: "Jane",
+        lastName: "Doe",
+        phoneNumber: "321-654-0987",
+        emailAddress: "jane@email.com"
+    }
+}
+
+export function del(id: string, custom = false): void {
+    if (custom) delete fixed[id]
+    else {
+        if (!db[id]) throw new Error(`Delete failed, contact with id of ${id} does not exist!`)
+        delete db[id]
+    }
 }
 
 export function add(): string {
@@ -74,9 +92,12 @@ export function add(): string {
     return newId
 }
 
-export function edit(id: string, data: Contact): void {
-    if (!db[id]) throw new Error(`Editing Failed, contact with id of ${id} does not exist!`)
-    db[id] = data
+export function edit(id: string, data: Contact, custom = false): void {
+    if (custom) fixed[id] = data
+    else {
+        if (!db[id]) throw new Error(`Editing Failed, contact with id of ${id} does not exist!`)
+        db[id] = data
+    }
 }
 
 // generate uuid (version 4)

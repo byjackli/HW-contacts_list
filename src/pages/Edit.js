@@ -7,7 +7,7 @@ function Edit() {
 
     return <main>
         <h1>Editing Contact</h1>
-        <Editor id={id} />
+        <Editor id={id} fixed={["demo", "me"].includes(id)} />
     </main>
 }
 

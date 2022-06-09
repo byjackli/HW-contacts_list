@@ -15,7 +15,7 @@ function Card(props) {
         [{ closeModal }] = useContext(ModalContext);
 
     function handleDelete() {
-        del(props.id)
+        del(props.id, props?.fixed)
         console.info(closeModal)
         closeModal()
     }
@@ -24,8 +24,11 @@ function Card(props) {
     }
     function handleUpdateExpanded(e, state) {
         if (!e.target.closest(".preventDefault"))
-            if (e.type === "keydown" && !["Enter", "Spacebar"].includes(e.key)) return
-            else updateExpanded(state)
+            updateExpanded(state)
+    }
+    function handleKeyDown(e) {
+        if (["Enter", " "].includes(e.key)) updateExpanded(!expanded)
+        else if (["Delete", "Backspace"].includes(e.key)) handleSwipeRight()
     }
     function handleDrag(e) {
         const diff = e.clientX - dragOrigin
@@ -44,7 +47,7 @@ function Card(props) {
 
     const fullname = `${props.firstName}${props.lastName ? ` ${props.lastName}` : ""}`;
 
-    return <div className={`card ${expanded}`} id={props.id} onClick={e => handleUpdateExpanded(e, !expanded)} tabIndex="0" onKeyDown={e => handleUpdateExpanded(e, !expanded)}
+    return <div className={`card ${expanded}`} id={props.id} onClick={e => handleUpdateExpanded(e, !expanded)} tabIndex="0" onKeyDown={e => handleKeyDown(e)}
         draggable onDragStart={e => updateDragOrigin(e.clientX)} onDragEnd={e => handleDrag(e)}>
         <div className={`actions ${expanded ? "" : "hidden"}`} aria-hidden={!expanded}>
             <div className="lhs">
