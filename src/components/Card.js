@@ -16,7 +16,6 @@ function Card(props) {
 
     function handleDelete() {
         del(props.id, props?.fixed)
-        console.info(closeModal)
         closeModal()
     }
     function handleSwipeRight() {
@@ -31,6 +30,7 @@ function Card(props) {
         else if (["Delete", "Backspace"].includes(e.key)) handleSwipeRight()
     }
     function handleDrag(e) {
+        console.info(e)
         const diff = e.clientX - dragOrigin
 
         if (100 < Math.abs(diff)) {
@@ -47,16 +47,16 @@ function Card(props) {
 
     const fullname = `${props.firstName}${props.lastName ? ` ${props.lastName}` : ""}`;
 
-    return <div className={`card ${expanded}`} id={props.id} onClick={e => handleUpdateExpanded(e, !expanded)} tabIndex="0" onKeyDown={e => handleKeyDown(e)}
-        draggable onDragStart={e => updateDragOrigin(e.clientX)} onDragEnd={e => handleDrag(e)}>
+    return <div aria-label={`contact card, click to ${expanded ? "collapse" : "expand"}.`} className={`card ${expanded}`} id={props.id} onClick={e => handleUpdateExpanded(e, !expanded)} tabIndex="0" onKeyDown={e => handleKeyDown(e)}
+        draggable onDragStart={e => updateDragOrigin(e.clientX)} onDragEnd={e => handleDrag(e)} onTouchStart={e => updateDragOrigin(e.targetTouches[0].clientX)} onTouchEnd={e => handleDrag(e.targetTouches[0])}>
         <div className={`actions ${expanded ? "" : "hidden"}`} aria-hidden={!expanded}>
             <div className="lhs">
-                <button onClick={e => handleUpdateExpanded(e, false)}><Icon art="reply" title="collapse" /></button>
+                <button aria-label="collapse contact card" onClick={e => handleUpdateExpanded(e, false)}><Icon art="reply" title="collapse" /></button>
             </div>
             <div className="rhs">
-                <Modal openModal={openModal} open={<button className="preventDefault"><Icon art="delete_forever" title="delete forever" /></button>
+                <Modal openModal={openModal} open={<button className="preventDefault" aria-label={`delete ${fullname} from contacts`}><Icon art="delete_forever" title="delete forever" /></button>
                 } >
-                    <div className="guard">
+                    <div className="guard" role="alert">
                         <div>are you sure you want to delete <strong>{fullname}</strong>?</div>
                         <div className="button-container">
                             <button onClick={closeModal}>nevermind</button>
@@ -64,7 +64,7 @@ function Card(props) {
                         </div>
                     </div>
                 </Modal>
-                <Link to={`/edit/${props.id}`}>
+                <Link aria-label={`edit ${fullname}'s contact card`} to={`/edit/${props.id}`}>
                     <Icon art="edit" title="edit contact" />
                 </Link>
             </div>
@@ -74,9 +74,9 @@ function Card(props) {
                 <p>{fullname}</p>
                 {props.icon ? <Icon {...props.icon} /> : null}
             </div>
-            <p>{props.phoneNumber}</p>
+            <p aria-label="phone number">{props.phoneNumber}</p>
 
-            {expanded || props.editing ? <p>{props.emailAddress}</p> : null}
+            {expanded || props.editing ? <p aria-label="email address">{props.emailAddress}</p> : null}
         </div>
     </div>
 }

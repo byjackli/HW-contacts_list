@@ -9,7 +9,7 @@ import ModalContext from "../context/ModalContext"
 export function ModalManager() {
     const [{ stack }, setContext] = useContext(ModalContext),
         modals = []
-    let trapped = false, resume = document.activeElement;
+    let trapped = false, resume = document.activeElement, safe = resume?.closest(".card")?.previousElementSibling;
 
     // close modal
     function close() {
@@ -18,7 +18,8 @@ export function ModalManager() {
         setContext({ closeModal: close, stack: newStack })
 
         trapped = false
-        resume.focus()
+        if (resume) resume.focus()
+        else safe.focus()
     }
 
     // traps focus within most recent active modal
@@ -42,6 +43,7 @@ export function ModalManager() {
 
         if (!trapped) {
             resume = document.activeElement
+            safe = resume?.closest(".card")?.previousElementSibling
             focusable[0].focus()
             trapped = true
         }
@@ -63,7 +65,7 @@ export function ModalManager() {
 
     const modalCount = stack.length
     for (let i = modalCount - 1; -1 < i; i--)
-        modals.push(<div className="modal-container" style={{ zIndex: i }} key={`modal-level-${i}`}>
+        modals.push(<div className="modal-container" role="dialog" style={{ zIndex: i }} key={`modal-level-${i}`}>
             {stack[i]}
             <div className="modal-backdrop" onClick={close} aria-label="close" />
         </div>)
@@ -86,7 +88,7 @@ function Modal(props) {
 
     // activate modal
     function open() {
-        const newStack = [...stack, <>{props.children}</>]
+        const newStack = [...stack, props.children]
         setContext({ closeModal: closeModal, stack: newStack })
     }
 

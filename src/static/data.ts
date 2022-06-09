@@ -10,13 +10,13 @@ let db: Record<string, Contact> = {
     "001": {
         firstName: "Jack",
         lastName: "Li",
-        phoneNumber: "3474764944",
+        phoneNumber: "347-476-4944",
         emailAddress: "Jack7598@gmail.com"
     },
     "002": {
         firstName: "Max",
         lastName: "Mayfield",
-        phoneNumber: "2120042002",
+        phoneNumber: "212-004-2002",
         emailAddress: "maxMayfield@strangerThings.com",
         icon: { art: "star", title: "favorite contact" }
     },
@@ -30,20 +30,20 @@ let db: Record<string, Contact> = {
     "004": {
         firstName: "VISA",
         lastName: "",
-        phoneNumber: "18008472911",
+        phoneNumber: "1-800-847-2911",
         emailAddress: "contact@visa.com",
         icon: { art: "store", title: "verified business" }
     },
     "005": {
         firstName: "Placeholder",
         lastName: "Value",
-        phoneNumber: "0000000000",
+        phoneNumber: "000-000-0000",
         emailAddress: "placeholder@value.com"
     },
     "006": {
         firstName: "Nancy",
         lastName: "Wheeler",
-        phoneNumber: "2120011995",
+        phoneNumber: "212-001-1995",
         emailAddress: "nancyw@strangerThings.com",
         icon: { art: "emergency", title: "emergency contact" }
     },

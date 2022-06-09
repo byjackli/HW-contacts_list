@@ -1,4 +1,5 @@
 import './App.css';
+import './Media.css';
 import { Suspense, lazy, useState } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 

@@ -27,6 +27,7 @@
     --width-border: 2px;
     --width-underline: 5px;
     --width-form: 15rem;
+    --width-editor: 40rem;
     --width-side: 6rem;
 
     --round-container: 1.25rem;
@@ -160,12 +161,15 @@ button:focus-visible {
 
 
 /* ========  EDITOR  === */
-.editor {
+.editor,
+div.help {
+    max-width: var(--width-editor);
     margin: 0 var(--width-side);
 
     display: flex;
-    flex-direction: row;
-    gap: var(--gap-xxl);
+    flex-flow: row wrap-reverse;
+    justify-content: space-between;
+    gap: var(--gap-l);
 }
 
 
@@ -446,14 +450,6 @@ nav .icon span:last-of-type {
 
 
 /* ############ PAGE: HELP ############ */
-div.help {
-    padding-left: var(--width-side);
-
-    display: flex;
-    flex-direction: row;
-    gap: var(--gap-xxl);
-}
-
 .section-container {
     min-width: var(--width-form);
     width: var(--width-form);
