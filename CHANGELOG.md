@@ -1,3 +1,9 @@
+### Day 2
+- Completed implementation of `Modal` component
+- Started CSS implementation
+- Figma design of large screen layouts
+- General page and component bugfixes
+
 ### Day 1
 - Setup static database with dummy data
 - Implemented Navbar

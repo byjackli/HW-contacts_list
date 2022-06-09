@@ -18,21 +18,21 @@ let db: Record<string, Contact> = {
         lastName: "Mayfield",
         phoneNumber: "2120042002",
         emailAddress: "maxMayfield@strangerThings.com",
-        icon: { art: "star", title: "favorite" }
+        icon: { art: "star", title: "favorite contact" }
     },
     "003": {
         firstName: "Mike",
         lastName: "Wheeler",
         phoneNumber: "212-012-2002",
         emailAddress: "mike@strangerThings.com",
-        icon: { art: "eco", title: "new" }
+        icon: { art: "eco", title: "new contact" }
     },
     "004": {
         firstName: "VISA",
         lastName: "",
         phoneNumber: "18008472911",
         emailAddress: "contact@visa.com",
-        icon: { art: "store", title: "new" }
+        icon: { art: "store", title: "verified business" }
     },
     "005": {
         firstName: "Placeholder",
@@ -45,14 +45,14 @@ let db: Record<string, Contact> = {
         lastName: "Wheeler",
         phoneNumber: "2120011995",
         emailAddress: "nancyw@strangerThings.com",
-        icon: { art: "emergency", title: "emergency" }
+        icon: { art: "emergency", title: "emergency contact" }
     },
     "007": {
         firstName: "Emergency",
         lastName: "",
         phoneNumber: "911",
         emailAddress: "911@us.gov",
-        icon: { art: "emergency", title: "emergency" }
+        icon: { art: "emergency", title: "emergency contact" }
     }
 }
 

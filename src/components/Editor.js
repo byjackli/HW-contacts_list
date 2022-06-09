@@ -1,6 +1,8 @@
 import { useState } from "react"
 import db, { edit } from "../static/data.ts"
 
+import Card from "./Card"
+
 function Editor(props) {
 
     const
@@ -17,14 +19,17 @@ function Editor(props) {
         updateForm(updated)
     }
 
-    return <><form className="editor" onSubmit={e => e.preventDefault()}>
-        <input name="firstName" type="text" placeholder="firstName" value={formData.firstName} onChange={handleUpdateField} />
-        <input name="lastName" type="text" placeholder="lastName" value={formData.lastName} onChange={handleUpdateField} />
-        <input name="phoneNumber" type="text" placeholder="phoneNumber" value={formData.phoneNumber} onChange={handleUpdateField} />
-        <input name="emailAddress" type="text" placeholder="emailAddress" value={formData.emailAddress} onChange={handleUpdateField} />
-    </form >
-        {formData.firstName}
-    </>
+    return <div className="editor" >
+        <form onSubmit={e => e.preventDefault()}>
+            <input name="firstName" type="text" placeholder="First Name" value={formData.firstName} onChange={handleUpdateField} />
+            <input name="lastName" type="text" placeholder="Last Name" value={formData.lastName} onChange={handleUpdateField} />
+            <input name="phoneNumber" type="text" placeholder="Phone Number" value={formData.phoneNumber} onChange={handleUpdateField} />
+            <input name="emailAddress" type="text" placeholder="Email Address" value={formData.emailAddress} onChange={handleUpdateField} />
+        </form >
+        <div className="preview">
+            <Card id={props.id} expanded {...formData} />
+        </div>
+    </div>
 }
 
 export default Editor

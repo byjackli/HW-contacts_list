@@ -7,6 +7,7 @@ function New() {
     const id = add()
 
     return <main>
+        <h1>Creating New Contact</h1>
         <Editor id={id} />
     </main>
 }

@@ -7,7 +7,7 @@ import ModalContext from "../context/ModalContext"
 // 3. when modal is opened, first element is not autofocused
 
 export function ModalManager() {
-    const [{ closeModal, stack }, setContext] = useContext(ModalContext),
+    const [{ stack }, setContext] = useContext(ModalContext),
         modals = []
     let trapped = false, resume = document.activeElement;
 
@@ -70,8 +70,8 @@ export function ModalManager() {
 
 
     useEffect(() => {
-        window.addEventListener("keydown", trapFocus)
         setContext({ closeModal: close, stack })
+        window.addEventListener("keydown", trapFocus)
         return () => window.removeEventListener("keydown", trapFocus)
     }, [])
 

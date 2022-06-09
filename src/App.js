@@ -21,7 +21,7 @@ function App() {
   return (
     <ModalContext.Provider value={[context, setContext]}>
       <ModalManager />
-      <div className='root-container' aria-hidden={context.length}>
+      <div className='root-container' aria-hidden={!!context.stack.length}>
         <Router>
           <Nav />
 
