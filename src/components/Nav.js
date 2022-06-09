@@ -8,7 +8,7 @@ function Nav() {
             <NavLink to="/"><Icon art="home" title="Home" /></NavLink>
             <div>
                 <NavLink to="/my-card"><Icon art="account_circle" title="My Card" /></NavLink>
-                <NavLink to="/new"><Icon art="person_add" title="New Contact" /></NavLink>
+                <NavLink aria-label="create a new contact" to="/new"><Icon art="person_add" title="New Contact" /></NavLink>
             </div>
         </div>
         <div>

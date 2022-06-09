@@ -1,0 +1,143 @@
+@media only screen and (max-width: 1980px) {
+    :root {
+        --normal: 18px;
+
+        --icon-m: 32px;
+        --icon-s: 24px;
+
+        --width-underline: 2px;
+        --width-border: 2px;
+
+    }
+
+    .guard {
+        max-width: 350px;
+        width: 500px;
+    }
+}
+
+@media only screen and (max-width: 1270px) {
+    :root {
+        --normal: 24px;
+
+        --icon-m: 40px;
+        --icon-s: 32px;
+
+        --width-nav: 5rem;
+    }
+
+    nav .icon span:last-of-type {
+        max-width: 0;
+        max-height: 0;
+        overflow: hidden;
+
+        text-transform: lowercase;
+        font-weight: bold;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    :root {
+        --width-nav: 100%;
+
+        --width-editor: fit-content;
+        --width-side: auto;
+
+        --round-container: 1.25rem;
+        --round-button: .5rem;
+    }
+
+    .root-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+    }
+
+    nav,
+    nav div {
+        flex-direction: row;
+    }
+
+    nav {
+        height: fit-content;
+        padding: 0;
+        grid-row: 2 / -1;
+
+        justify-content: center;
+        gap: var(--gap-m);
+    }
+
+    nav>div:last-of-type {
+        flex-direction: row;
+    }
+
+    nav>div {
+        width: fit-content;
+        flex-direction: row-reverse;
+
+    }
+
+
+    nav a {
+        width: fit-content;
+        height: fit-content;
+        margin: unset;
+    }
+
+    nav .icon {
+        /* margin: 0 var(--gap-m); */
+        gap: 0;
+    }
+
+    nav .icon span:last-of-type {
+        max-width: 0;
+        max-height: 0;
+        overflow: hidden;
+
+        text-transform: lowercase;
+        font-weight: bold;
+    }
+
+    h1 {
+        margin: 4rem auto;
+        text-align: center;
+        font-size: 1.5rem;
+        border-bottom-width: var(--width-border);
+    }
+
+
+
+    .editor,
+    div.help {
+        flex-direction: column-reverse;
+        align-items: center;
+        padding-bottom: 3rem;
+    }
+
+
+    .list-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .guard {
+        max-width: 90%;
+        width: 500px;
+    }
+}
+
+@media only screen and (max-width: 568px) {
+    :root {
+        --normal: 16px;
+
+        --icon-m: 24px;
+        --icon-s: 20px;
+
+        --gap-m: .5rem;
+        --gap-l: 1rem;
+        --gap-xl: 1.5rem;
+    }
+
+    .list-container {
+        padding: 2rem 1.5rem 4rem 1.5rem;
+    }
+}

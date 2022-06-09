@@ -1,3 +1,12 @@
+### Day 3
+- Completed responsive design (CSS)
+- added aira / improved accessibility
+- ran accessibility tests on Windows (NVDA)
+- ran accessibility tests on iOS (VoiceOver)
+- fixed swipe features not working on touch screen devices
+- general bugfixes
+- update README with install + run instructions
+
 ### Day 2
 - Completed implementation of `Modal` component
 - Started CSS implementation
