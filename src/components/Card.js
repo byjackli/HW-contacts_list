@@ -30,7 +30,7 @@ function Card(props) {
         else if (["Delete", "Backspace"].includes(e.key)) handleSwipeRight()
     }
     function handleDrag(e) {
-        console.info(e)
+        if (!e) return
         const diff = e.clientX - dragOrigin
 
         if (100 < Math.abs(diff)) {
@@ -48,7 +48,7 @@ function Card(props) {
     const fullname = `${props.firstName}${props.lastName ? ` ${props.lastName}` : ""}`;
 
     return <div aria-label={`contact card, click to ${expanded ? "collapse" : "expand"}.`} className={`card ${expanded}`} id={props.id} onClick={e => handleUpdateExpanded(e, !expanded)} tabIndex="0" onKeyDown={e => handleKeyDown(e)}
-        draggable onDragStart={e => updateDragOrigin(e.clientX)} onDragEnd={e => handleDrag(e)} onTouchStart={e => updateDragOrigin(e.targetTouches[0].clientX)} onTouchEnd={e => handleDrag(e.targetTouches[0])}>
+        draggable onDragStart={e => updateDragOrigin(e.clientX)} onDragEnd={e => handleDrag(e)} onTouchStart={e => updateDragOrigin(e?.targetTouches[0]?.clientX)} onTouchEnd={e => handleDrag(e?.changedTouches[0])}>
         <div className={`actions ${expanded ? "" : "hidden"}`} aria-hidden={!expanded}>
             <div className="lhs">
                 <button aria-label="collapse contact card" onClick={e => handleUpdateExpanded(e, false)}><Icon art="reply" title="collapse" /></button>

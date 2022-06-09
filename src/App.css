@@ -256,7 +256,7 @@ nav .icon span:last-of-type {
 
 .card:focus-visible,
 .card:focus-within {
-    border-width: 3px;
+    outline: solid 1px var(--blue);
     background-color: var(--selected);
 }
 

@@ -79,6 +79,7 @@
 
     nav a {
         width: fit-content;
+        height: fit-content;
         margin: unset;
     }
 
