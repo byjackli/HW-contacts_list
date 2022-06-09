@@ -4,8 +4,9 @@ import Editor from "../components/Editor"
 
 function Edit() {
     const { id } = useParams()
-    
+
     return <main>
+        <h1>Editing Contact</h1>
         <Editor id={id} />
     </main>
 }

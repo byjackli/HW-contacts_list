@@ -1,0 +1,399 @@
+:root {
+    --white: #FFFFFF;
+    --blue: #1A1F71;
+    --gold: #F7B600;
+    --black: #000000;
+    --placeholder: #A3A3A3;
+    --delete: #9C0E0E;
+    --selected: #1A1F711A;
+
+    --eco: #239507;
+    --store: #0E88FA;
+    --star: var(--gold);
+    --emergency: var(--delete);
+
+    --normal: 28px;
+
+    --gap-s: .25rem;
+    --gap-m: 1rem;
+    --gap-l: 2rem;
+    --gap-xl: 3rem;
+
+    --icon-m: 48px;
+    --icon-s: 36px;
+
+    --width-nav: 12.5rem;
+    --width-border: 2px;
+    --width-underline: 5px;
+    --width-form: 20rem;
+
+    --round-container: 1.25rem;
+    --round-button: .25rem;
+}
+
+* {
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+
+    box-sizing: border-box;
+
+    color: var(--black);
+    font-size: var(--normal);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+
+    border: unset;
+}
+
+.modal-manager {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 9999;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+}
+
+.root-container {
+    width: 100vw;
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: var(--width-nav) 1fr;
+    overflow: hidden;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+
+    overflow-y: auto;
+}
+
+h1 {
+    width: fit-content;
+    padding-bottom: .25rem;
+    margin: 4rem 6rem;
+
+    font-size: 2rem;
+    font-style: italic;
+    text-transform: lowercase;
+    border-bottom: .25rem solid var(--black);
+}
+
+p {
+    overflow-wrap: anywhere;
+}
+
+
+
+
+
+/* ========  FORM / INPUTS / BUTTON  === */
+form {
+    max-width: var(--width-form);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+}
+
+input {
+    padding: .25rem .5rem;
+
+    border-bottom: var(--width-underline) solid var(--blue);
+}
+
+input::placeholder {
+    font-weight: bold;
+    font-size: .8rem;
+    color: var(--placeholder);
+}
+
+input:focus {
+    outline: unset;
+    border-bottom-color: var(--gold);
+}
+
+button {
+    width: fit-content;
+    padding: .5rem 1rem;
+
+    background-color: var(--white);
+    border: solid var(--black) var(--width-border);
+    border-radius: var(--round-button);
+
+    cursor: pointer;
+}
+
+
+
+
+
+/* ========  EDITOR  === */
+.editor {
+    margin: 5rem 6rem;
+
+    display: flex;
+    flex-direction: row;
+    gap: 10rem;
+}
+
+
+
+
+
+/* ========  NAV  === */
+nav {
+    width: var(--width-nav);
+    max-width: var(--width-nav);
+    height: 100%;
+    padding: 2rem 0;
+    background-color: var(--blue);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+nav * {
+    color: var(--white);
+}
+
+nav>div {
+    width: 100%;
+}
+
+nav div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+}
+
+nav a {
+    width: 100%;
+}
+
+nav a.active * {
+    color: var(--blue);
+    background-color: var(--gold);
+}
+
+nav .icon {
+    padding: .75rem 1rem;
+    margin-left: .5rem;
+    gap: var(--gap-m);
+}
+
+nav .icon span:last-of-type {
+    max-width: unset;
+    max-height: unset;
+    overflow: unset;
+
+    text-transform: lowercase;
+    font-weight: bold;
+}
+
+
+
+
+
+/* ========  CARD  === */
+.card {
+    width: 15rem;
+    height: 6.25rem;
+    padding: 1.75em 2em;
+    margin: 2em 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    border: var(--width-border) solid var(--blue);
+    border-radius: var(--round-container);
+
+    cursor: pointer;
+}
+
+.card.true {
+    margin-top: 1em;
+    margin-bottom: .25em;
+    min-height: 9rem;
+}
+
+.card.true .content {
+    width: 100%;
+    margin-top: 1em;
+}
+
+.card .actions,
+.card .actions .rhs,
+.card .actions .lhs,
+.card .actions .modal-activator {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-m);
+}
+
+.card .actions .modal-activator {
+    justify-content: center;
+    align-items: center;
+}
+
+.card .actions {
+    position: absolute;
+    top: .5em;
+    left: 50%;
+    width: 90%;
+
+    transform: translate3d(-50%, 0, 0);
+    justify-content: space-between;
+}
+
+.card .actions button {
+    padding: 0px;
+    border: unset;
+    background-color: transparent;
+}
+
+.card .actions .material-icons {
+    font-size: var(--icon-s);
+}
+
+.card .actions[aria-hidden="true"] {
+    display: none;
+}
+
+.card .content {
+    overflow-y: auto;
+}
+
+.card .name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--gap-s);
+    font-weight: 100;
+}
+
+.card .name p {
+    font-weight: bold;
+}
+
+.card .name .material-icons {
+    font-size: var(--icon-s);
+}
+
+.eco {
+    color: var(--eco);
+}
+
+.star {
+    color: var(--star);
+}
+
+.store {
+    color: var(--store);
+}
+
+.emergency,
+.delete_forever {
+    color: var(--emergency);
+}
+
+.list-container {
+    padding: 4em 3.5em 6em 3.5em;
+
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0 var(--gap-xl);
+}
+
+
+
+
+/* ========  GENERAL ICON  === */
+.icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.material-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--icon-m);
+}
+
+.icon span:last-of-type {
+    max-width: 0px;
+    max-height: 0px;
+    overflow: hidden;
+}
+
+
+
+
+/* ========  MODAL  === */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: #000000CC;
+    z-index: -1;
+}
+
+
+
+
+/* ========  GUARD  === */
+.guard {
+    max-width: 500px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    padding: 3rem 2rem;
+    background-color: var(--white);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-l);
+
+    text-align: center;
+    border-radius: var(--round-container);
+}
+
+.guard .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-m);
+}
+
+.guard .button-container button {
+    width: 100%;
+}
+
+.guard .button-container button:last-of-type {
+    background-color: var(--delete);
+    color: var(--white);
+    font-weight: bold;
+    border-color: transparent;
+}
+
+
+
+
+
+.hidden {
+    display: none;
+}

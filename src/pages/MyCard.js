@@ -1,9 +1,9 @@
 import React from "react"
 
 function MyCard() {
-    return <div>
-        MyCard
-    </div>
+    return <main>
+        <h1>My Contact Card</h1>
+    </main>
 }
 
 export default MyCard

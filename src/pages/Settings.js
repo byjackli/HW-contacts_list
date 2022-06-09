@@ -1,9 +1,9 @@
 import React from "react"
 
 function Settings() {
-    return <div>
-        Settings
-    </div>
+    return <main>
+        <h1>Settings</h1>
+    </main>
 }
 
 export default Settings
