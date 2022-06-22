@@ -1,15 +1,13 @@
-import React from "react"
-import Editor from "../components/Editor"
-import { add } from "../static/data.ts"
+import React from 'react';
+import Editor from '../components/Editor';
 
 function New() {
-
-    const id = add()
-
-    return <main>
-        <h1>Creating New Contact</h1>
-        <Editor id={id} />
-    </main>
+    return (
+        <main>
+            <h1>Creating New Contact</h1>
+            <Editor new />
+        </main>
+    );
 }
 
-export default New
+export default New;

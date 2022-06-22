@@ -4,6 +4,8 @@
     --gold: #F7B600;
     --black: #000000;
     --placeholder: #A3A3A3;
+    --hover: #1A1E7138;
+    --delete-dim: #9C0E0E65;
     --delete: #9C0E0E;
     --selected: #1A1F711A;
 
@@ -140,7 +142,17 @@ input:focus {
     border-bottom-color: var(--gold);
 }
 
-button {
+input.false {
+    border-color: var(--delete);
+    background-color: var(--delete-dim);
+}
+
+input.false::placeholder {
+    color: var(--black);
+}
+
+button,
+input[type="button"] {
     width: fit-content;
     padding: .5rem 1rem;
 
@@ -151,9 +163,23 @@ button {
     cursor: pointer;
 }
 
-button:focus-visible {
+button.true,
+input[type="button"].true {
+    background-color: var(--placeholder);
+    cursor: not-allowed;
+}
+
+button:focus-visible,
+input[type="button"]:focus-visible,
+button:active,
+input[type="button"]:active {
     background-color: var(--selected);
     outline: var(--width-border) solid var(--black);
+}
+
+button:hover,
+input[type="button"]:hover {
+    background-color: var(--hover);
 }
 
 
@@ -170,6 +196,50 @@ div.help {
     flex-flow: row wrap-reverse;
     justify-content: space-between;
     gap: var(--gap-l);
+}
+
+.editor .buttons {
+    margin-top: var(--gap-xl);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#notifs {
+    width: 15rem;
+    margin-top: var(--gap-l);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-s);
+}
+
+#notifs ul,
+#notifs .saved {
+    padding: var(--gap-m);
+    padding-left: var(--gap-l);
+    border: solid var(--width-border) var(--emergency);
+    border-radius: var(--round-container);
+    background-color: var(--emergency);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-s);
+    list-style-type: disc;
+}
+
+#notifs ul li {
+    display: list-item;
+}
+
+#notifs * {
+    color: var(--white);
+}
+
+#notifs .saved {
+    background-color: var(--eco);
+    padding-left: var(--gap-m);
+    border: unset;
 }
 
 
@@ -239,7 +309,7 @@ nav .icon span:last-of-type {
 /* ========  CARD  === */
 .card {
     width: 15rem;
-    height: 6.25rem;
+    height: fit-content;
     min-height: 6.25rem;
     padding: 1.75em 2em;
     margin: 2em 0;
@@ -305,6 +375,10 @@ nav .icon span:last-of-type {
 
     transform: translate3d(-50%, 0, 0);
     justify-content: space-between;
+}
+
+.card .actions.deactivate {
+    opacity: .25;
 }
 
 .card .actions button {

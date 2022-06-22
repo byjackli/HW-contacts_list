@@ -1,7 +1,9 @@
 function Loading() {
-    return <div>
-        Loading
+  return (
+    <div>
+      Loading
     </div>
+  );
 }
 
-export default Loading
+export default Loading;
