@@ -9,7 +9,7 @@ Prototyping will be done on Figma, implementation will be done with ReactJS, and
 2. CD into project folder
 3. run `npm run build`
 4. install static server `npm install -s serve`
-5. start server `npm serve -s build`
+5. start server `serve -s build`
 6. navigate to [http://localhost:3000](http://localhost:3000)
 
 

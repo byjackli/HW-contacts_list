@@ -1,3 +1,10 @@
+### Day x
+- redux state management
+- submit button!
+- form validation + feedback
+- remove scrolling from CSS cards
+- eslint + prettier code formatting
+
 ### Day 3
 - Completed responsive design (CSS)
 - added aira / improved accessibility
